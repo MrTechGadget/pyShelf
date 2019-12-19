@@ -11,4 +11,4 @@ COPY . .
 
 EXPOSE 8001
 #CMD [ "python", "./importBooks" ]
-CMD [ "uwsgi", "--ini uwsgi.ini"]
+CMD ["uwsgi", "--ini", "/data/pyShelf/uwsgi.ini"]
