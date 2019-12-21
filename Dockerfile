@@ -1,6 +1,8 @@
 FROM python:3
 
 WORKDIR /data
+RUN apt-get update
+RUN apt-get install -y nginx
 
 RUN git clone https://github.com/MrTechGadget/pyShelf.git && cd pyShelf
 
@@ -8,7 +10,8 @@ RUN git clone https://github.com/MrTechGadget/pyShelf.git && cd pyShelf
 RUN pip install --no-cache-dir -r /data/pyShelf/requirements.txt
 
 COPY . .
+ADD pyshelf_nginx.conf /etc/nginx/sites-enabled/
 
-EXPOSE 8001
+EXPOSE 80
 #CMD [ "python", "./importBooks" ]
-CMD ["uwsgi", "--ini", "/data/pyShelf/uwsgi.ini"]
+CMD ./start.sh
